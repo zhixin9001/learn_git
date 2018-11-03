@@ -1,0 +1,133 @@
+﻿Git commands
+	git init - initializeds a new Git repository and begins tracking an existing directory, add .git folder
+	
+	git clone - creates a local copy of a project that already exists remotely,The clone includes all the project’s files, history, and branches.
+	
+	git add- stages a change.
+	
+	git commit-    with comment: -m "注释内容"
+		git commit --amend 修改上次提交的注释内容
+		或者git commit --amend -m "新的" 应对VIM中中文乱码
+	
+	git status - 查看状态
+	
+	git reset -  git reset HEAD <file> 撤销是一步，指定file则只恢复该file，否则恢复上一次的全部提交
+	
+	git checkout -  用暂存区域覆盖工作目录， git checkout -- <file> 覆盖指定文件
+		指定id，用指定快照覆盖暂存区和工作目录
+		不指定id，用暂存区域覆盖工作目录
+	
+	git log-  
+		--decorate
+		--oneline
+		--graph
+		--all
+	
+	git diff-  暂存区域 vs 工作目录
+		git diff id1 id2 - 比较两个历史快照
+		git diff  id 指定快照vs 当前目录
+		git diff HEAD 最新提交vs当前目录
+		git diff --cached  暂存区域 vs GIT仓库
+		git diff --cached  id  暂存区域 vs 指定快照
+		
+		
+	
+	删除文件
+		git rm 文件名 ，删除了工作目录和暂存区域的文件，即取消跟踪，下次提交时不纳入版本管理，但使用git log仍然可见
+		git reset --soft HEAD~，这个操作可以删除log
+		如果工作区域和暂存区域版本不一致，git rm会提示，使用git rm -f暴力删除
+		git rm --cached，只删除GIT仓库文件，保留工作目录或暂存区域
+	
+	git mv 旧文件名 新文件名 -- 重命名
+		
+		
+		
+	
+	
+	Git三颗树
+		工作目录
+		暂存区域
+		GIT仓库
+	
+	Git的工作流程
+		1 在工作目录中添加、修改文件
+		2 将需要进行版本管理的文件放入暂存区域
+		3 将暂存区域的文件提交到GIT仓库
+		
+	Git文件状态
+		modified
+		staged
+		committed
+		
+	颜色
+		红色 工作目录
+		绿色 暂存区域
+		黄绿色 commit sha1
+		
+	
+	
+	
+	www.processon.com
+	bbs.fishc.com
+	
+	git reset
+		git reset HEAD~  到上一版本
+		git reset --mixed 默认选项，移动HEAD的指向，将其指向上一个快照；将HEAD移动后指向的快照回滚到暂存区域
+		git reset --soft 只是移动HEAD的指向，将其指向上一个快照，相当于撤销错误提交
+		git reset --hard 在--mixed的基础上，同时会将暂存区域的文件恢复到工作目录
+		git reset <快照ID>  向前、向后
+		git reset <快照ID>  文件名/路径  HEAD指针不会改变
+		
+	Git分支
+		
+		git branch 分支名称 
+		git log --decorate
+		git checkout 分支名
+		git checkout -b 分支名 创建并切换到分支
+		git merge  分支名 将指定分支merge到当前分支
+			遇到冲突时git status可以查看冲突文件
+		git branch -d/--delete 分支名 
+			
+	
+	checkout与reset命令的区别
+		恢复文件时
+			功能一样，也不会改变HEAD指针的位置
+			但reset只将指定文件恢复到暂存区域(--mixed)，checkout则是同时覆盖暂存区域和工作目录
+			而且reset在恢复文件是，不允许使用--soft或者--hard
+		恢复快照时
+			reset哟哦那个与回到过去，根据选择不同，reset命令将移动HEAD指针(--soft) 覆盖暂存区域(--mixed)  覆盖工作目录(--hard)
+			checkout用于切换分支，但也是通过移动HEAD指针、覆盖暂存区域、工作目录来实现的
+				但两者区别在于，reset --hard直接覆盖工作目录，
+				checkout会先检查当前的工作状态，是否clean、尝试merge等，不会直接覆盖，比reset更安全
+				
+				reset命令会移动HEAD所在分支的指向，而checkout命令只会移动HEAD自身来指向另一个分支
+				
+			
+			
+		
+	Vim操作
+		B 上一页
+		F 下一页
+		J 下一行
+		K 上一行
+		D 下半页
+		U 上半页
+		大写G 最后一行
+		小写G 第一行
+		行号+g 跳到指定行
+		/ 从上向下搜索
+		? 从下向上搜索
+		n 下一个匹配
+		N 上一个匹配
+		
+		I 插入模式
+		shift+z +z 保存退出
+		:q 退出
+		
+		
+		
+	
+	
+	
+	
+	
